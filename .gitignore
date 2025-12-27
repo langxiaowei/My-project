@@ -1,0 +1,23 @@
+# ===== IntelliJ IDEA =====
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# ===== Maven =====
+target/
+*/target/
+
+# ===== Logs =====
+logs/
+*.log
+
+# ===== OS Files =====
+.DS_Store
+Thumbs.db
+
+# ===== Spring Boot =====
+*.pid
+
+# ===== Environment =====
+.env
