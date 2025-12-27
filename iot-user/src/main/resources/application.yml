@@ -1,0 +1,25 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: iot-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+  datasource:
+    url: jdbc:mysql://localhost:3306/iot_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root   # 换成你自己的
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  # mapper xml 的位置
+  mapper-locations: classpath*:mapper/*.xml
+  # 实体包路径（等会儿 User 放这里）
+  type-aliases-package: com.example.user.pojo
+  configuration:
+    map-underscore-to-camel-case: true

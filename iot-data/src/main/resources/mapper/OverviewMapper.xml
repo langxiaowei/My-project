@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.data.mapper.OverviewMapper">
+
+    <select id="totalDevices" resultType="long">
+        SELECT COUNT(1) FROM tb_device
+    </select>
+
+    <select id="onlineDevices" resultType="long">
+        SELECT COUNT(1) FROM tb_device WHERE status = 1
+    </select>
+
+    <select id="todayReports" resultType="long">
+        SELECT COUNT(1) FROM tb_device_data WHERE create_time >= CURDATE()
+    </select>
+
+    <select id="lastReportTime" resultType="string">
+        SELECT DATE_FORMAT(MAX(create_time), '%Y-%m-%d %H:%i:%s')
+        FROM tb_device_data
+    </select>
+
+</mapper>

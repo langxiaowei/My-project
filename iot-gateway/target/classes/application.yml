@@ -1,0 +1,54 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: iot-gateway
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+
+    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+
+      routes:
+        - id: user-service
+          uri: lb://iot-user
+#          uri: http://localhost:9001
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1
+
+        - id: device-service
+          uri: lb://iot-device
+          predicates:
+            - Path=/device/**
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1
+
+        - id: data-service
+          uri: lb://iot-data
+          predicates:
+            - Path=/data/**,/alarm/**
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

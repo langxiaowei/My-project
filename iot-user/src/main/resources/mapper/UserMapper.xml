@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.user.mapper.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.example.user.pojo.User">
+        <id     property="id"          column="id"/>
+        <result property="username"    column="username"/>
+        <result property="password"    column="password"/>
+        <result property="phone"       column="phone"/>
+        <result property="nickname"    column="nickname"/>
+        <result property="status"      column="status"/>
+        <result property="createTime"  column="create_time"/>
+        <result property="updateTime"  column="update_time"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.user.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_user (username, password, phone, nickname, status)
+        VALUES (#{username}, #{password}, #{phone}, #{nickname}, #{status})
+    </insert>
+
+    <select id="selectById" resultMap="UserResultMap">
+        SELECT * FROM tb_user WHERE id = #{id}
+    </select>
+
+    <select id="selectByUsername" resultMap="UserResultMap">
+        SELECT * FROM tb_user WHERE username = #{username}
+    </select>
+
+</mapper>
